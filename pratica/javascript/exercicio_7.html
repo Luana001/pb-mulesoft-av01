@@ -1,0 +1,46 @@
+<meta charset="utf-8">
+<input/>
+<button>Calcule Troco</button>
+
+<script>
+	
+	var vMoedas = [0.5, 0.25, 0.1, 0.05, 0.01];
+	var moedas = [];
+	var valorTotal = 0;
+
+	function calculaMoedas(valor, moeda, i) {
+		var qMoedas = parseInt(valor/moeda);
+		moedas[i] = qMoedas;
+
+		if(qMoedas >= 1) {
+			valor = valor - (qMoedas*moeda);
+			return valor.toPrecision(2);
+		} else {
+			return valor; 		
+		}
+	}
+
+	function mostraTroco() {
+		var valor = input.value;
+
+		for(var i=0; i<5; i++) {
+			valor = calculaMoedas(valor, vMoedas[i], i);
+			valorTotal = valorTotal + moedas[i];
+		}
+
+		document.write("Total de moedas: " + valorTotal + " <br> Sendo: <br>");
+
+		for(var i=0; i<5; i++){
+			if(i==4)
+				document.write(moedas[i] + " de " + vMoedas[i]*100 + " centavo <br>");
+			else
+				document.write(moedas[i] + " de " + vMoedas[i]*100 + " centavos <br>");
+		}
+	}
+
+	var input = document.querySelector("input");
+	input.focus();
+	var button = document.querySelector("button");
+	button.onclick = mostraTroco;
+
+</script>
